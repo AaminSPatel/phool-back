@@ -7,14 +7,19 @@ import productRoutes from '../routes/productRoutes.js';
 import serviceRoutes from '../routes/serviceRoutes.js';
 import customerRoutes from '../routes/customerRoutes.js'; // Import customer routes
 import connectDB from '../db.js'; // Import database connection
+import path from "path";
 
 const app = express();
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 dotenv.config();
 connectDB(); // Connect to the database
 
-const allowedOrigin = ['http://localhost:5173', 'https://aaminspatel.github.io']
+const allowedOrigin = ['http://localhost:5173/phoolwala/', 'https://aaminspatel.github.io/phoolwala/']
 
 const corsOptions = {
     origin: (origin,callback)=>{
