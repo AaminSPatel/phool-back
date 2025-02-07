@@ -9,7 +9,7 @@ import customerRoutes from '../routes/customerRoutes.js'; // Import customer rou
 import connectDB from '../db.js'; // Import database connection
 
 const app = express();
-app.use('/public', express.static('../backend/public'));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 dotenv.config();
 connectDB(); // Connect to the database
