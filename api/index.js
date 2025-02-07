@@ -8,14 +8,13 @@ import serviceRoutes from '../routes/serviceRoutes.js';
 import customerRoutes from '../routes/customerRoutes.js'; // Import customer routes
 import connectDB from '../db.js'; // Import database connection
 import path from "path";
-
 const app = express();
+
+// ✅ Fix: Define `__dirname` manually if using ES modules
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 app.use('/public', express.static(path.join(__dirname, 'public')));
-
 dotenv.config();
 connectDB(); // Connect to the database
 
@@ -30,12 +29,16 @@ const corsOptions = {
         else {
             callback(new Error('Not allowed by CORS'));
           }
-    }
+    },
+    methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type, Authorization",
 }
 
 app.use(cors(corsOptions))
 
-
+app.get('/',(req,res)=>{
+  res.send('Server is running')
+})
 app.use(express.json()); // Middleware to parse JSON requests
 
 // Use routes
